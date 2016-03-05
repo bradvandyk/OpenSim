@@ -79,7 +79,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             
             currentRuntime = device.runtime.name
             
-            let deviceMenuItem = statusItem.menu?.addItemWithTitle("\(device.name) (\(device.runtime))", action: nil, keyEquivalent: "")
+            let deviceMenuItem = statusItem.menu?.addItemWithTitle(device.fullName, action: nil, keyEquivalent: "")
             deviceMenuItem?.onStateImage = NSImage(named: "active")
             deviceMenuItem?.offStateImage = NSImage(named: "inactive")
             deviceMenuItem?.state = device.state == .Booted ? NSOnState : NSOffState
@@ -91,18 +91,52 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         
         statusItem.menu!.addItem(NSMenuItem.separatorItem())
-        statusItem.menu!.addItemWithTitle("Quit", action: "quit", keyEquivalent: "")
+        // reload needed since DirectoryWatcher might not be working
+        statusItem.menu!.addItemWithTitle("Reload", action: "reload", keyEquivalent: "r")
+        statusItem.menu!.addItemWithTitle("Quit", action: "quit", keyEquivalent: "q")
     }
     
     func quit() {
         NSApplication.sharedApplication().terminate(self)
     }
     
+    func reload() {
+        // needed since
+        self.buildMenu()
+    }
+    
+    func dialogOKCancel(question: String, text: String) -> Bool {
+        let myPopup: NSAlert = NSAlert()
+        myPopup.messageText = question
+        myPopup.informativeText = text
+        myPopup.alertStyle = NSAlertStyle.CriticalAlertStyle
+        myPopup.addButtonWithTitle("OK")
+        myPopup.addButtonWithTitle("Cancel")
+        let res = myPopup.runModal()
+        if res == NSAlertFirstButtonReturn {
+            return true
+        }
+        return false
+    }
+    
     func appMenuItemClicked(sender: NSMenuItem) {
         if let pair = sender.representedObject as? DeviceApplicationPair,
             appState = pair.device.fetchApplicationState(pair.application) {
-                if NSFileManager.defaultManager().fileExistsAtPath(appState.sandboxPath) {
-                    NSWorkspace.sharedWorkspace().openURL(NSURL(fileURLWithPath: appState.sandboxPath))
+                // if control click
+                if let event = NSApp.currentEvent where event.modifierFlags.contains(.ControlKeyMask) {
+                    let answer = dialogOKCancel("Confirm Delete?", text: "Are you sure you want to delete \(pair.application.bundleDisplayName) for \(pair.device.fullName)")
+                    if answer {
+                        // delete the app
+                        shell("/usr/bin/xcrun", arguments: ["simctl", "uninstall", pair.device.UDID, pair.application.bundleID])
+                        // might not need this if DirectoryWatcher is working
+                        self.buildMenu()
+                    }
+                }
+                else {
+                    // open the app directory
+                    if NSFileManager.defaultManager().fileExistsAtPath(appState.sandboxPath) {
+                        NSWorkspace.sharedWorkspace().openURL(NSURL(fileURLWithPath: appState.sandboxPath))
+                    }
                 }
         }
     }

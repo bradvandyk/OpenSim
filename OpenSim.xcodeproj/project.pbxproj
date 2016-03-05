@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AFA2F09A1C8A62CE00AF6AD6 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA2F0991C8A62CE00AF6AD6 /* Helper.swift */; };
 		B3054E181BF381CE00F433C2 /* FileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3054E161BF381CE00F433C2 /* FileInfo.swift */; };
 		B3054E1A1BF3958500F433C2 /* DirectoryWatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3054E191BF3958500F433C2 /* DirectoryWatcher.swift */; };
 		B3054E1C1BF3988300F433C2 /* CancelBlocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3054E1B1BF3988300F433C2 /* CancelBlocks.swift */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AFA2F0991C8A62CE00AF6AD6 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		B3054E161BF381CE00F433C2 /* FileInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileInfo.swift; sourceTree = "<group>"; };
 		B3054E191BF3958500F433C2 /* DirectoryWatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectoryWatcher.swift; sourceTree = "<group>"; };
 		B3054E1B1BF3988300F433C2 /* CancelBlocks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CancelBlocks.swift; sourceTree = "<group>"; };
@@ -81,6 +83,7 @@
 				B3054E161BF381CE00F433C2 /* FileInfo.swift */,
 				B3054E191BF3958500F433C2 /* DirectoryWatcher.swift */,
 				B3054E1B1BF3988300F433C2 /* CancelBlocks.swift */,
+				AFA2F0991C8A62CE00AF6AD6 /* Helper.swift */,
 				B3A1E3241BF049690090EC58 /* Assets.xcassets */,
 				B3A1E3261BF049690090EC58 /* MainMenu.xib */,
 				B3A1E3291BF049690090EC58 /* Info.plist */,
@@ -169,6 +172,7 @@
 				B3A1E3301BF05F980090EC58 /* DeviceManager.swift in Sources */,
 				B3A1E3231BF049690090EC58 /* AppDelegate.swift in Sources */,
 				B3054E1A1BF3958500F433C2 /* DirectoryWatcher.swift in Sources */,
+				AFA2F09A1C8A62CE00AF6AD6 /* Helper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -23,6 +23,12 @@ struct Device {
     let state: State
     let applications: [Application]
     
+    var fullName:String {
+        get {
+            return "\(self.name) (\(self.runtime))"
+        }
+    }
+    
     init(UDID: String, type: String, name: String, runtime: String, state: State) {
         self.UDID = UDID
         self.type = type
