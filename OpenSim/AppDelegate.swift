@@ -74,7 +74,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         iOSDevices.forEach { device in
             if (currentRuntime != "" && device.runtime.name != currentRuntime) {
                 // add filler
-                statusItem.menu?.addItemWithTitle("", action: nil, keyEquivalent: "")
+                statusItem.menu?.addItem(NSMenuItem.separatorItem())
             }
             
             currentRuntime = device.runtime.name
